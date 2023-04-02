@@ -1,19 +1,15 @@
 import { BigNumber } from "ethers";
-import { RainInterpreterTs } from "../../../interpreter/RainInterpreterTs";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 
 /**
  * @public
  */
-export function OpThisAddress(
-    this: RainInterpreterTs,
+export const OpThisAddress: opClosure = (
     _inputs: BigNumber[],
     _operand: number,
-    _data?: any
-): BigNumber[] {
-    if (this.self) {
-        return [
-            BigNumber.from(this.self)
-        ]
-    } 
-    else throw new Error('Undefined contract')
+    _data: InterpreterData
+): BigNumber[] => {
+    return [
+        BigNumber.from(_data.interpreterAddress)
+    ]
 }

@@ -2,5 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as integrity from "./integrity";
-export * as ops from "./ops";
 export * as runtime from "./runtime";

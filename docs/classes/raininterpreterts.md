@@ -2,7 +2,7 @@
 
 # Class RainInterpreterTs
 
-- The javascript version of the RainVM, basically does the same job RainVM does but off-chain.
+- The typescript (javascript) version of the RainInterpreter.sol, which basically does the same job offchain, i.e evaluates an expression off-chain with either reading necessary data with onchain calls or by some provided mock data. There are many usecases, simulating and forecasting are just a few to mention.
 
 <b>Signature:</b>
 
@@ -14,102 +14,109 @@ class RainInterpreterTs
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [caller](./raininterpreterts.md#caller-property) | `string` | An ethers Signer. |
-|  [chainId](./raininterpreterts.md#chainId-property) | `number` |  |
-|  [lastState](./raininterpreterts.md#lastState-property) | `BigNumber[]` | The result state of the executed Rain TypeScript Interpreter. |
-|  [opmeta](./raininterpreterts.md#opmeta-property) | `tsOpMeta[]` | key/value pair of opcodes and their functions for all standard opcodes |
-|  [overrideFns](./raininterpreterts.md#overrideFns-property) | [overrideFns](../types/overridefns.md) | functions to override the existing Functions in opmeta |
-|  [self](./raininterpreterts.md#self-property) | `string` | The thisAddress address of the instance of this class used for THIS\_ADDRESS opcode |
-|  [state](./raininterpreterts.md#state-property) | [State](../interfaces/state.md) | The property of type State which that RainInterpreterTs will run based on. |
-|  [storage](./raininterpreterts.md#storage-property) | [kvStorage](../types/kvstorage.md) | property of the class to store key/value pairs as Storage. used by GET/SET in TypeScript Rainterpreter |
-|  [StorageRange](./raininterpreterts.md#StorageRange-property) | `number` | Range of available storage variables accessible by eval |
+|  [expressions](./raininterpreterts.md#expressions-property) | `StateConfig[]` | The expressions of this iterpreter |
+|  [interpreterAddress](./raininterpreterts.md#interpreterAddress-property) | `string` | The interpreter's address |
+|  [lastStack](./raininterpreterts.md#lastStack-property) | `BigNumber[]` | The latest result (final stack) of an evaluated expression. |
+|  [opConfigs](./raininterpreterts.md#opConfigs-property) | `opConfig[]` | Array of opcodes' enums and their ts functions, inputs and outputs which defines the closure for each of them |
+|  [overrideFns](./raininterpreterts.md#overrideFns-property) | [OverrideFns](../types/overridefns.md) | Functions to override the existing opcodes ts functions (closures) |
+|  [provider](./raininterpreterts.md#provider-property) | `Provider` | An ethersjs provider used to read onchain data |
+|  [state](./raininterpreterts.md#state-property) | [State](../interfaces/state.md) | The state which which is used to eval an expression. |
+|  [storage](./raininterpreterts.md#storage-property) | [kvStorage](../types/kvstorage.md) | An object to store key/value pairs of an interpreter which is mapped by each msg.sender and namespace |
+|  [voidSigner](./raininterpreterts.md#voidSigner-property) | `VoidSigner` | An etherjs VoidSigner used to read onchain data |
+
+## Static Methods
+
+|  Method | Description |
+|  --- | --- |
+|  [addStorage(storage, sender, namespace, kv)](./raininterpreterts.md#addStorage-method-static-1) | Method to add key/value item to a kvStorage object |
+|  [getStorage(storage, sender, namespace)](./raininterpreterts.md#getStorage-method-static-1) | Methdo to get the k/v items of a sender and namespace, undefined if doesn't exist |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [connect(caller)](./raininterpreterts.md#connect-method-1) |  |
-|  [run(caller, data, entrypoint, overrideFns)](./raininterpreterts.md#run-method-1) | Method to execute the RainInterpreterTs. |
-|  [setContract(thisAddress)](./raininterpreterts.md#setContract-method-1) |  |
-|  [setExpression(stateConfig)](./raininterpreterts.md#setExpression-method-1) | Method to set new StateConfig for this Typescript Rain Interpreter class |
+|  [addExpression(stateConfig)](./raininterpreterts.md#addExpression-method-1) | Method to add StateConfig to an instance of interpreter-ts |
+|  [run(sender, data, config)](./raininterpreterts.md#run-method-1) | Method to run eval for an expression of an instance of interpreter-ts. If no expression or index provided it will evaluate the last available expression in the instance's expressions array |
 
 ## Property Details
 
-<a id="caller-property"></a>
+<a id="expressions-property"></a>
 
-### caller
+### expressions
 
-An ethers Signer.
+The expressions of this iterpreter
 
 <b>Signature:</b>
 
 ```typescript
-caller?: string;
+readonly expressions: StateConfig[];
 ```
 
-<a id="chainId-property"></a>
+<a id="interpreterAddress-property"></a>
 
-### chainId
+### interpreterAddress
+
+The interpreter's address
 
 <b>Signature:</b>
 
 ```typescript
-chainId?: number;
+readonly interpreterAddress: string;
 ```
 
-<a id="lastState-property"></a>
+<a id="lastStack-property"></a>
 
-### lastState
+### lastStack
 
-The result state of the executed Rain TypeScript Interpreter.
+The latest result (final stack) of an evaluated expression.
 
 <b>Signature:</b>
 
 ```typescript
-readonly lastState: BigNumber[];
+readonly lastStack: BigNumber[];
 ```
 
-<a id="opmeta-property"></a>
+<a id="opConfigs-property"></a>
 
-### opmeta
+### opConfigs
 
-key/value pair of opcodes and their functions for all standard opcodes
+Array of opcodes' enums and their ts functions, inputs and outputs which defines the closure for each of them
 
 <b>Signature:</b>
 
 ```typescript
-readonly opmeta: tsOpMeta[];
+readonly opConfigs: opConfig[];
 ```
 
 <a id="overrideFns-property"></a>
 
 ### overrideFns
 
-functions to override the existing Functions in opmeta
+Functions to override the existing opcodes ts functions (closures)
 
 <b>Signature:</b>
 
 ```typescript
-overrideFns?: overrideFns;
+readonly overrideFns?: OverrideFns;
 ```
 
-<a id="self-property"></a>
+<a id="provider-property"></a>
 
-### self
+### provider
 
-The thisAddress address of the instance of this class used for THIS\_ADDRESS opcode
+An ethersjs provider used to read onchain data
 
 <b>Signature:</b>
 
 ```typescript
-self?: string;
+readonly provider: Provider;
 ```
 
 <a id="state-property"></a>
 
 ### state
 
-The property of type State which that RainInterpreterTs will run based on.
+The state which which is used to eval an expression.
 
 <b>Signature:</b>
 
@@ -121,7 +128,7 @@ readonly state: State;
 
 ### storage
 
-property of the class to store key/value pairs as Storage. used by GET/SET in TypeScript Rainterpreter
+An object to store key/value pairs of an interpreter which is mapped by each msg.sender and namespace
 
 <b>Signature:</b>
 
@@ -129,108 +136,127 @@ property of the class to store key/value pairs as Storage. used by GET/SET in Ty
 readonly storage: kvStorage;
 ```
 
-<a id="StorageRange-property"></a>
+<a id="voidSigner-property"></a>
 
-### StorageRange
+### voidSigner
 
-Range of available storage variables accessible by eval
+An etherjs VoidSigner used to read onchain data
 
 <b>Signature:</b>
 
 ```typescript
-readonly StorageRange: number;
+readonly voidSigner: VoidSigner;
 ```
 
-## Method Details
+## Static Method Details
 
-<a id="connect-method-1"></a>
+<a id="addStorage-method-static-1"></a>
 
-### connect(caller)
+### addStorage(storage, sender, namespace, kv)
 
-
-<b>Signature:</b>
-
-```typescript
-connect(caller: string): this;
-```
-
-#### Parameters
-
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  caller | `string` |  |
-
-<b>Returns:</b>
-
-`this`
-
-<a id="run-method-1"></a>
-
-### run(caller, data, entrypoint, overrideFns)
-
-Method to execute the RainInterpreterTs.
+Method to add key/value item to a kvStorage object
 
 <b>Signature:</b>
 
 ```typescript
-run(caller?: string, data?: any, entrypoint?: number, overrideFns?: overrideFns): Promise<BigNumber[]>;
+static addStorage(storage: kvStorage, sender: string, namespace: string, kv: {
+        key: BigNumber;
+        value: BigNumber;
+    }): void;
 ```
 
 #### Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  caller | `string` |  |
-|  data | `any` | (optional) Used as additional info for some local opcodes or custom opcode functions i.e. applyOpFn. |
-|  entrypoint | `number` | the index of sources to start eval |
-|  overrideFns | [overrideFns](../types/overridefns.md) |  |
-
-<b>Returns:</b>
-
-`Promise<BigNumber[]>`
-
-- An array represting the final state of the RainInterpreterTs stack.
-
-<a id="setContract-method-1"></a>
-
-### setContract(thisAddress)
-
-
-<b>Signature:</b>
-
-```typescript
-setContract(thisAddress: string | Contract): this;
-```
-
-#### Parameters
-
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  thisAddress | `string \| Contract` |  |
-
-<b>Returns:</b>
-
-`this`
-
-<a id="setExpression-method-1"></a>
-
-### setExpression(stateConfig)
-
-Method to set new StateConfig for this Typescript Rain Interpreter class
-
-<b>Signature:</b>
-
-```typescript
-setExpression(stateConfig: StateConfig): void;
-```
-
-#### Parameters
-
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  stateConfig | [StateConfig](../types/stateconfig.md) | StateConfig to set |
+|  storage | [kvStorage](../types/kvstorage.md) | The storage obj to add the kv to under sender and namespace |
+|  sender | `string` | The msg.sender address, address that calls the eval method of interpreter |
+|  namespace | `string` | Namespace of the k/v storage, public namespaces are 0, and for private ones it is the address of owner of k/v storage |
+|  kv | <pre>{&#010;    key: BigNumber;&#010;    value: BigNumber;&#010;}</pre> | The key/value pair |
 
 <b>Returns:</b>
 
 `void`
+
+<a id="getStorage-method-static-1"></a>
+
+### getStorage(storage, sender, namespace)
+
+Methdo to get the k/v items of a sender and namespace, undefined if doesn't exist
+
+<b>Signature:</b>
+
+```typescript
+static getStorage(storage: kvStorage, sender: string, namespace: string): {
+        key: BigNumber;
+        value: BigNumber;
+    }[] | undefined;
+```
+
+#### Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  storage | [kvStorage](../types/kvstorage.md) | The storage obj to add the kv to under sender and namespace |
+|  sender | `string` | The msg.sender address, address that calls the eval method of interpreter |
+|  namespace | `string` | Namespace of the k/v storage, public namespaces are 0, and for private ones it is the address of owner of k/v storage |
+
+<b>Returns:</b>
+
+`{
+        key: BigNumber;
+        value: BigNumber;
+    }[] | undefined`
+
+Array of key/value pairs, undefined if not found
+
+## Method Details
+
+<a id="addExpression-method-1"></a>
+
+### addExpression(stateConfig)
+
+Method to add StateConfig to an instance of interpreter-ts
+
+<b>Signature:</b>
+
+```typescript
+addExpression(stateConfig: StateConfig): void;
+```
+
+#### Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  stateConfig | [StateConfig](../types/stateconfig.md) | StateConfig to add |
+
+<b>Returns:</b>
+
+`void`
+
+<a id="run-method-1"></a>
+
+### run(sender, data, config)
+
+Method to run eval for an expression of an instance of interpreter-ts. If no expression or index provided it will evaluate the last available expression in the instance's expressions array
+
+<b>Signature:</b>
+
+```typescript
+run(sender: string, data: RuntimeData, config?: RunConfig): Promise<EvalResult>;
+```
+
+#### Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  sender | `string` | The msg.sender, the address that calls the eval method of interpreter-ts |
+|  data | [RuntimeData](../types/runtimedata.md) | Used as any additional data that opcode functions may need |
+|  config | [RunConfig](../types/runconfig.md) | (optional) config for interpreter-ts eval |
+
+<b>Returns:</b>
+
+`Promise<EvalResult>`
+
+- An object with array of BigNumbers as final stack items and block number and timestamp.
 

@@ -41,7 +41,7 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
-        name: "caller",
+        name: "sender",
         type: "address",
       },
       {
@@ -97,7 +97,7 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
-        name: "caller",
+        name: "sender",
         type: "address",
       },
       {

@@ -149,6 +149,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SeedDance__factory>;
     getContractFactory(
+      name: "LibDebug",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LibDebug__factory>;
+    getContractFactory(
       name: "ERC20Redeem",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20Redeem__factory>;
@@ -232,10 +236,6 @@ declare module "hardhat/types/runtime" {
       name: "IInterpreterV1",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IInterpreterV1__factory>;
-    getContractFactory(
-      name: "StandardInterpreter",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.StandardInterpreter__factory>;
     getContractFactory(
       name: "Rainterpreter",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -369,9 +369,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LibIntegrityStateTest__factory>;
     getContractFactory(
-      name: "AllStandardOpsTest",
+      name: "IInterpreterV1Consumer",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.AllStandardOpsTest__factory>;
+    ): Promise<Contracts.IInterpreterV1Consumer__factory>;
+    getContractFactory(
+      name: "LibEncodedDispatchTest",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LibEncodedDispatchTest__factory>;
     getContractFactory(
       name: "LibInterpreterStateTest",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -381,9 +385,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LibStackTopTest__factory>;
     getContractFactory(
-      name: "StackHeightTest",
+      name: "LibMemoryKVTest",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.StackHeightTest__factory>;
+    ): Promise<Contracts.LibMemoryKVTest__factory>;
     getContractFactory(
       name: "FixedPointMathTest",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -432,6 +436,10 @@ declare module "hardhat/types/runtime" {
       name: "ReserveToken18",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ReserveToken18__factory>;
+    getContractFactory(
+      name: "ReserveTokenDecimals",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ReserveTokenDecimals__factory>;
     getContractFactory(
       name: "ReserveTokenERC1155",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -497,14 +505,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TierV2__factory>;
     getContractFactory(
-      name: "VerifyTier",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.VerifyTier__factory>;
-    getContractFactory(
-      name: "VerifyTierFactory",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.VerifyTierFactory__factory>;
-    getContractFactory(
       name: "AutoApprove",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AutoApprove__factory>;
@@ -513,9 +513,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AutoApproveFactory__factory>;
     getContractFactory(
-      name: "IVerifyCallback",
+      name: "IVerifyCallbackV1",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IVerifyCallback__factory>;
+    ): Promise<Contracts.IVerifyCallbackV1__factory>;
+    getContractFactory(
+      name: "IVerifyV1",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IVerifyV1__factory>;
     getContractFactory(
       name: "Verify",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -700,6 +704,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SeedDance>;
     getContractAt(
+      name: "LibDebug",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LibDebug>;
+    getContractAt(
       name: "ERC20Redeem",
       address: string,
       signer?: ethers.Signer
@@ -804,11 +813,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IInterpreterV1>;
-    getContractAt(
-      name: "StandardInterpreter",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.StandardInterpreter>;
     getContractAt(
       name: "Rainterpreter",
       address: string,
@@ -975,10 +979,15 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.LibIntegrityStateTest>;
     getContractAt(
-      name: "AllStandardOpsTest",
+      name: "IInterpreterV1Consumer",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.AllStandardOpsTest>;
+    ): Promise<Contracts.IInterpreterV1Consumer>;
+    getContractAt(
+      name: "LibEncodedDispatchTest",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LibEncodedDispatchTest>;
     getContractAt(
       name: "LibInterpreterStateTest",
       address: string,
@@ -990,10 +999,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.LibStackTopTest>;
     getContractAt(
-      name: "StackHeightTest",
+      name: "LibMemoryKVTest",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.StackHeightTest>;
+    ): Promise<Contracts.LibMemoryKVTest>;
     getContractAt(
       name: "FixedPointMathTest",
       address: string,
@@ -1054,6 +1063,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ReserveToken18>;
+    getContractAt(
+      name: "ReserveTokenDecimals",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ReserveTokenDecimals>;
     getContractAt(
       name: "ReserveTokenERC1155",
       address: string,
@@ -1135,16 +1149,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TierV2>;
     getContractAt(
-      name: "VerifyTier",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.VerifyTier>;
-    getContractAt(
-      name: "VerifyTierFactory",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.VerifyTierFactory>;
-    getContractAt(
       name: "AutoApprove",
       address: string,
       signer?: ethers.Signer
@@ -1155,10 +1159,15 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AutoApproveFactory>;
     getContractAt(
-      name: "IVerifyCallback",
+      name: "IVerifyCallbackV1",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.IVerifyCallback>;
+    ): Promise<Contracts.IVerifyCallbackV1>;
+    getContractAt(
+      name: "IVerifyV1",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IVerifyV1>;
     getContractAt(
       name: "Verify",
       address: string,

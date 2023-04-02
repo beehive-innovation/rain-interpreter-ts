@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export { IInterpreterV1__factory } from "./IInterpreterV1__factory";
-export { StandardInterpreter__factory } from "./StandardInterpreter__factory";

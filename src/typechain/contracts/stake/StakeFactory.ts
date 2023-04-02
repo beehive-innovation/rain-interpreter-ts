@@ -4,6 +4,7 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -26,22 +27,45 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export type StateConfigStruct = {
+  sources: PromiseOrValue<BytesLike>[];
+  constants: PromiseOrValue<BigNumberish>[];
+};
+
+export type StateConfigStructOutput = [string[], BigNumber[]] & {
+  sources: string[];
+  constants: BigNumber[];
+};
+
 export type StakeConfigStruct = {
   asset: PromiseOrValue<string>;
   name: PromiseOrValue<string>;
   symbol: PromiseOrValue<string>;
+  expressionDeployer: PromiseOrValue<string>;
+  interpreter: PromiseOrValue<string>;
+  stateConfig: StateConfigStruct;
 };
 
-export type StakeConfigStructOutput = [string, string, string] & {
+export type StakeConfigStructOutput = [
+  string,
+  string,
+  string,
+  string,
+  string,
+  StateConfigStructOutput
+] & {
   asset: string;
   name: string;
   symbol: string;
+  expressionDeployer: string;
+  interpreter: string;
+  stateConfig: StateConfigStructOutput;
 };
 
 export interface StakeFactoryInterface extends utils.Interface {
   functions: {
     "createChild(bytes)": FunctionFragment;
-    "createChildTyped((address,string,string))": FunctionFragment;
+    "createChildTyped((address,string,string,address,address,(bytes[],uint256[])))": FunctionFragment;
     "implementation()": FunctionFragment;
     "isChild(address)": FunctionFragment;
   };

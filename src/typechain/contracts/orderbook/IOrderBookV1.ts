@@ -35,11 +35,13 @@ export type StateConfigStructOutput = [string[], BigNumber[]] & {
 
 export type IOStruct = {
   token: PromiseOrValue<string>;
+  decimals: PromiseOrValue<BigNumberish>;
   vaultId: PromiseOrValue<BigNumberish>;
 };
 
-export type IOStructOutput = [string, BigNumber] & {
+export type IOStructOutput = [string, number, BigNumber] & {
   token: string;
+  decimals: number;
   vaultId: BigNumber;
 };
 
@@ -49,6 +51,7 @@ export type OrderConfigStruct = {
   interpreterStateConfig: StateConfigStruct;
   validInputs: IOStruct[];
   validOutputs: IOStruct[];
+  data: PromiseOrValue<BytesLike>;
 };
 
 export type OrderConfigStructOutput = [
@@ -56,13 +59,15 @@ export type OrderConfigStructOutput = [
   string,
   StateConfigStructOutput,
   IOStructOutput[],
-  IOStructOutput[]
+  IOStructOutput[],
+  string
 ] & {
   expressionDeployer: string;
   interpreter: string;
   interpreterStateConfig: StateConfigStructOutput;
   validInputs: IOStructOutput[];
   validOutputs: IOStructOutput[];
+  data: string;
 };
 
 export type OrderStruct = {
@@ -72,6 +77,7 @@ export type OrderStruct = {
   handleIODispatch: PromiseOrValue<BigNumberish>;
   validInputs: IOStruct[];
   validOutputs: IOStruct[];
+  data: PromiseOrValue<BytesLike>;
 };
 
 export type OrderStructOutput = [
@@ -80,7 +86,8 @@ export type OrderStructOutput = [
   BigNumber,
   BigNumber,
   IOStructOutput[],
-  IOStructOutput[]
+  IOStructOutput[],
+  string
 ] & {
   owner: string;
   interpreter: string;
@@ -88,6 +95,7 @@ export type OrderStructOutput = [
   handleIODispatch: BigNumber;
   validInputs: IOStructOutput[];
   validOutputs: IOStructOutput[];
+  data: string;
 };
 
 export type ClearConfigStruct = {
@@ -182,11 +190,11 @@ export type WithdrawConfigStructOutput = [string, BigNumber, BigNumber] & {
 
 export interface IOrderBookV1Interface extends utils.Interface {
   functions: {
-    "addOrder((address,address,(bytes[],uint256[]),(address,uint256)[],(address,uint256)[]))": FunctionFragment;
-    "clear((address,address,uint256,uint256,(address,uint256)[],(address,uint256)[]),(address,address,uint256,uint256,(address,uint256)[],(address,uint256)[]),(uint256,uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "addOrder((address,address,(bytes[],uint256[]),(address,uint8,uint256)[],(address,uint8,uint256)[],bytes))": FunctionFragment;
+    "clear((address,address,uint256,uint256,(address,uint8,uint256)[],(address,uint8,uint256)[],bytes),(address,address,uint256,uint256,(address,uint8,uint256)[],(address,uint8,uint256)[],bytes),(uint256,uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
     "deposit((address,uint256,uint256))": FunctionFragment;
-    "removeOrder((address,address,uint256,uint256,(address,uint256)[],(address,uint256)[]))": FunctionFragment;
-    "takeOrders((address,address,uint256,uint256,uint256,((address,address,uint256,uint256,(address,uint256)[],(address,uint256)[]),uint256,uint256)[]))": FunctionFragment;
+    "removeOrder((address,address,uint256,uint256,(address,uint8,uint256)[],(address,uint8,uint256)[],bytes))": FunctionFragment;
+    "takeOrders((address,address,uint256,uint256,uint256,((address,address,uint256,uint256,(address,uint8,uint256)[],(address,uint8,uint256)[],bytes),uint256,uint256)[]))": FunctionFragment;
     "vaultBalance(address,address,uint256)": FunctionFragment;
     "withdraw((address,uint256,uint256))": FunctionFragment;
   };

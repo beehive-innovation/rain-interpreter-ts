@@ -1,20 +1,17 @@
-import { BigNumber, getDefaultProvider } from "ethers";
+import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 
 /**
  * @public
  */
-export async function OpBlockNumber(
+export const OpBlockNumber: opClosure = (
     _inputs: BigNumber[],
     _operand: number,
-    _data?: any
-): Promise<BigNumber[]> {
-    if (_data.chainId === 'number') {
-        const _provider = getDefaultProvider(_data.chainId)
-        return [
-            BigNumber.from(
-                await _provider.getBlockNumber()
-            )
-        ]
-    }
-    else throw new Error('undefined network')
+    _data: InterpreterData
+): BigNumber[] =>{
+    return [
+        BigNumber.from(
+            _data.blockNumber
+        )
+    ]
 }

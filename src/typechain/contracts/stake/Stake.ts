@@ -27,16 +27,39 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export type StateConfigStruct = {
+  sources: PromiseOrValue<BytesLike>[];
+  constants: PromiseOrValue<BigNumberish>[];
+};
+
+export type StateConfigStructOutput = [string[], BigNumber[]] & {
+  sources: string[];
+  constants: BigNumber[];
+};
+
 export type StakeConfigStruct = {
   asset: PromiseOrValue<string>;
   name: PromiseOrValue<string>;
   symbol: PromiseOrValue<string>;
+  expressionDeployer: PromiseOrValue<string>;
+  interpreter: PromiseOrValue<string>;
+  stateConfig: StateConfigStruct;
 };
 
-export type StakeConfigStructOutput = [string, string, string] & {
+export type StakeConfigStructOutput = [
+  string,
+  string,
+  string,
+  string,
+  string,
+  StateConfigStructOutput
+] & {
   asset: string;
   name: string;
   symbol: string;
+  expressionDeployer: string;
+  interpreter: string;
+  stateConfig: StateConfigStructOutput;
 };
 
 export interface StakeInterface extends utils.Interface {
@@ -52,7 +75,7 @@ export interface StakeInterface extends utils.Interface {
     "deposit(uint256,address)": FunctionFragment;
     "depositRecords(address,uint256)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
-    "initialize((address,string,string))": FunctionFragment;
+    "initialize((address,string,string,address,address,(bytes[],uint256[])))": FunctionFragment;
     "maxDeposit(address)": FunctionFragment;
     "maxMint(address)": FunctionFragment;
     "maxRedeem(address)": FunctionFragment;
@@ -352,7 +375,7 @@ export type ApprovalEvent = TypedEvent<
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 
 export interface DepositEventObject {
-  caller: string;
+  sender: string;
   owner: string;
   assets: BigNumber;
   shares: BigNumber;
@@ -395,7 +418,7 @@ export type TransferEvent = TypedEvent<
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
 export interface WithdrawEventObject {
-  caller: string;
+  sender: string;
   receiver: string;
   owner: string;
   assets: BigNumber;
@@ -496,22 +519,22 @@ export interface Stake extends BaseContract {
     ): Promise<ContractTransaction>;
 
     maxDeposit(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     maxMint(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     maxRedeem(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     maxWithdraw(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -656,22 +679,22 @@ export interface Stake extends BaseContract {
   ): Promise<ContractTransaction>;
 
   maxDeposit(
-    arg0: PromiseOrValue<string>,
+    receiver_: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   maxMint(
-    arg0: PromiseOrValue<string>,
+    receiver_: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   maxRedeem(
-    owner: PromiseOrValue<string>,
+    owner_: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   maxWithdraw(
-    owner: PromiseOrValue<string>,
+    owner_: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -816,22 +839,22 @@ export interface Stake extends BaseContract {
     ): Promise<void>;
 
     maxDeposit(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     maxMint(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     maxRedeem(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     maxWithdraw(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -928,13 +951,13 @@ export interface Stake extends BaseContract {
     ): ApprovalEventFilter;
 
     "Deposit(address,address,uint256,uint256)"(
-      caller?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
       owner?: PromiseOrValue<string> | null,
       assets?: null,
       shares?: null
     ): DepositEventFilter;
     Deposit(
-      caller?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
       owner?: PromiseOrValue<string> | null,
       assets?: null,
       shares?: null
@@ -961,14 +984,14 @@ export interface Stake extends BaseContract {
     ): TransferEventFilter;
 
     "Withdraw(address,address,address,uint256,uint256)"(
-      caller?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
       receiver?: PromiseOrValue<string> | null,
       owner?: PromiseOrValue<string> | null,
       assets?: null,
       shares?: null
     ): WithdrawEventFilter;
     Withdraw(
-      caller?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
       receiver?: PromiseOrValue<string> | null,
       owner?: PromiseOrValue<string> | null,
       assets?: null,
@@ -1038,22 +1061,22 @@ export interface Stake extends BaseContract {
     ): Promise<BigNumber>;
 
     maxDeposit(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     maxMint(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     maxRedeem(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     maxWithdraw(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1199,22 +1222,22 @@ export interface Stake extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     maxDeposit(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     maxMint(
-      arg0: PromiseOrValue<string>,
+      receiver_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     maxRedeem(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     maxWithdraw(
-      owner: PromiseOrValue<string>,
+      owner_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

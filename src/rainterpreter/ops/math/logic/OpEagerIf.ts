@@ -1,9 +1,14 @@
 import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../../interpreter/types";
 
 /**
  * @public 
  */
-export function OpEagerIf(_inputs: BigNumber[], _operand: number, _data?: any): BigNumber[] {
+export const OpEagerIf: opClosure = (
+    _inputs: BigNumber[],
+    _operand: number,
+    _data: InterpreterData
+): BigNumber[] => {
     const false_ = _inputs.pop()
     const true_ = _inputs.pop()
     const condition_ = _inputs.pop()

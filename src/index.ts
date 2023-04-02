@@ -8,7 +8,11 @@ export * from './lib/TierReport';
 export * from './lib/TierwiseCombine';
 
 export * from './rainterpreter/allStandardOps';
-export * from './rainterpreter/opmeta';
+export * from './rainterpreter/rainterpreterOpConfigs';
+export * from './rainterpreter/defaultOverrides';
 
-export * from './types';
+export * from './simulation/simulation';
+export * from './simulation/types';
+
 export * from './utils';
+export * from './defaultProviders';

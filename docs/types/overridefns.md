@@ -1,12 +1,13 @@
-[Home](../index.md) &gt; [overrideFns](./overridefns.md)
+[Home](../index.md) &gt; [OverrideFns](./overridefns.md)
 
-# Type overrideFns
+# Type OverrideFns
 
+Functions (closures) to override opcodes' original functions
 
 <b>Signature:</b>
 
 ```typescript
-type overrideFns = {
-    [key: number]: (_inputs: BigNumber[], _operand: number, _data?: any) => BigNumber[];
+type OverrideFns = {
+    [key: number]: opClosure;
 };
 ```

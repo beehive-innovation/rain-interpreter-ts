@@ -24,6 +24,7 @@ import type {
 export interface LibUint256ArrayTestInterface extends utils.Interface {
   functions: {
     "arrayFrom(uint256,uint256,uint256,uint256)": FunctionFragment;
+    "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "arrayFrom(uint256,uint256)": FunctionFragment;
     "arrayFrom(uint256)": FunctionFragment;
     "arrayFrom(uint256,uint256,uint256[])": FunctionFragment;
@@ -32,6 +33,7 @@ export interface LibUint256ArrayTestInterface extends utils.Interface {
     "arrayFrom(uint256,uint256[])": FunctionFragment;
     "copyToNewUint256Array(uint256[])": FunctionFragment;
     "extend(uint256[],uint256[])": FunctionFragment;
+    "matrixFrom(uint256[])": FunctionFragment;
     "truncate(uint256[],uint256)": FunctionFragment;
     "unsafeCopyValuesTo(uint256[])": FunctionFragment;
   };
@@ -39,6 +41,7 @@ export interface LibUint256ArrayTestInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "arrayFrom(uint256,uint256,uint256,uint256)"
+      | "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)"
       | "arrayFrom(uint256,uint256)"
       | "arrayFrom(uint256)"
       | "arrayFrom(uint256,uint256,uint256[])"
@@ -47,6 +50,7 @@ export interface LibUint256ArrayTestInterface extends utils.Interface {
       | "arrayFrom(uint256,uint256[])"
       | "copyToNewUint256Array"
       | "extend"
+      | "matrixFrom"
       | "truncate"
       | "unsafeCopyValuesTo"
   ): FunctionFragment;
@@ -54,6 +58,17 @@ export interface LibUint256ArrayTestInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "arrayFrom(uint256,uint256,uint256,uint256)",
     values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -107,6 +122,10 @@ export interface LibUint256ArrayTestInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>[], PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
+    functionFragment: "matrixFrom",
+    values: [PromiseOrValue<BigNumberish>[]]
+  ): string;
+  encodeFunctionData(
     functionFragment: "truncate",
     values: [PromiseOrValue<BigNumberish>[], PromiseOrValue<BigNumberish>]
   ): string;
@@ -117,6 +136,10 @@ export interface LibUint256ArrayTestInterface extends utils.Interface {
 
   decodeFunctionResult(
     functionFragment: "arrayFrom(uint256,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -148,6 +171,7 @@ export interface LibUint256ArrayTestInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "extend", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "matrixFrom", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "truncate", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "unsafeCopyValuesTo",
@@ -189,6 +213,16 @@ export interface LibUint256ArrayTest extends BaseContract {
       b_: PromiseOrValue<BigNumberish>,
       c_: PromiseOrValue<BigNumberish>,
       d_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
+
+    "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)"(
+      a_: PromiseOrValue<BigNumberish>,
+      b_: PromiseOrValue<BigNumberish>,
+      c_: PromiseOrValue<BigNumberish>,
+      d_: PromiseOrValue<BigNumberish>,
+      e_: PromiseOrValue<BigNumberish>,
+      f_: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
@@ -243,6 +277,11 @@ export interface LibUint256ArrayTest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber[]] & { baseCopy_: BigNumber[] }>;
 
+    matrixFrom(
+      a_: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[][]]>;
+
     truncate(
       array_: PromiseOrValue<BigNumberish>[],
       newLength_: PromiseOrValue<BigNumberish>,
@@ -260,6 +299,16 @@ export interface LibUint256ArrayTest extends BaseContract {
     b_: PromiseOrValue<BigNumberish>,
     c_: PromiseOrValue<BigNumberish>,
     d_: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
+  "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)"(
+    a_: PromiseOrValue<BigNumberish>,
+    b_: PromiseOrValue<BigNumberish>,
+    c_: PromiseOrValue<BigNumberish>,
+    d_: PromiseOrValue<BigNumberish>,
+    e_: PromiseOrValue<BigNumberish>,
+    f_: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
@@ -314,6 +363,11 @@ export interface LibUint256ArrayTest extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
+  matrixFrom(
+    a_: PromiseOrValue<BigNumberish>[],
+    overrides?: CallOverrides
+  ): Promise<BigNumber[][]>;
+
   truncate(
     array_: PromiseOrValue<BigNumberish>[],
     newLength_: PromiseOrValue<BigNumberish>,
@@ -331,6 +385,16 @@ export interface LibUint256ArrayTest extends BaseContract {
       b_: PromiseOrValue<BigNumberish>,
       c_: PromiseOrValue<BigNumberish>,
       d_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
+
+    "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)"(
+      a_: PromiseOrValue<BigNumberish>,
+      b_: PromiseOrValue<BigNumberish>,
+      c_: PromiseOrValue<BigNumberish>,
+      d_: PromiseOrValue<BigNumberish>,
+      e_: PromiseOrValue<BigNumberish>,
+      f_: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
@@ -384,6 +448,11 @@ export interface LibUint256ArrayTest extends BaseContract {
       extend_: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
+
+    matrixFrom(
+      a_: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber[][]>;
 
     truncate(
       array_: PromiseOrValue<BigNumberish>[],
@@ -408,6 +477,16 @@ export interface LibUint256ArrayTest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)"(
+      a_: PromiseOrValue<BigNumberish>,
+      b_: PromiseOrValue<BigNumberish>,
+      c_: PromiseOrValue<BigNumberish>,
+      d_: PromiseOrValue<BigNumberish>,
+      e_: PromiseOrValue<BigNumberish>,
+      f_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     "arrayFrom(uint256,uint256)"(
       a_: PromiseOrValue<BigNumberish>,
       b_: PromiseOrValue<BigNumberish>,
@@ -456,6 +535,11 @@ export interface LibUint256ArrayTest extends BaseContract {
     extend(
       base_: PromiseOrValue<BigNumberish>[],
       extend_: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    matrixFrom(
+      a_: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -480,6 +564,16 @@ export interface LibUint256ArrayTest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    "arrayFrom(uint256,uint256,uint256,uint256,uint256,uint256)"(
+      a_: PromiseOrValue<BigNumberish>,
+      b_: PromiseOrValue<BigNumberish>,
+      c_: PromiseOrValue<BigNumberish>,
+      d_: PromiseOrValue<BigNumberish>,
+      e_: PromiseOrValue<BigNumberish>,
+      f_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     "arrayFrom(uint256,uint256)"(
       a_: PromiseOrValue<BigNumberish>,
       b_: PromiseOrValue<BigNumberish>,
@@ -528,6 +622,11 @@ export interface LibUint256ArrayTest extends BaseContract {
     extend(
       base_: PromiseOrValue<BigNumberish>[],
       extend_: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    matrixFrom(
+      a_: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

@@ -68,6 +68,7 @@ export interface VerifyInterface extends utils.Interface {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "REMOVER()": FunctionFragment;
     "REMOVER_ADMIN()": FunctionFragment;
+    "accountStatusAtTime(address,uint256)": FunctionFragment;
     "add(bytes)": FunctionFragment;
     "approve((address,bytes)[])": FunctionFragment;
     "ban((address,bytes)[])": FunctionFragment;
@@ -96,6 +97,7 @@ export interface VerifyInterface extends utils.Interface {
       | "DEFAULT_ADMIN_ROLE"
       | "REMOVER"
       | "REMOVER_ADMIN"
+      | "accountStatusAtTime"
       | "add"
       | "approve"
       | "ban"
@@ -133,6 +135,10 @@ export interface VerifyInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "REMOVER_ADMIN",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "accountStatusAtTime",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "add",
@@ -217,6 +223,10 @@ export interface VerifyInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "REMOVER", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "REMOVER_ADMIN",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "accountStatusAtTime",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "add", data: BytesLike): Result;
@@ -444,6 +454,12 @@ export interface Verify extends BaseContract {
 
     REMOVER_ADMIN(overrides?: CallOverrides): Promise<[string]>;
 
+    accountStatusAtTime(
+      account_: PromiseOrValue<string>,
+      timestamp_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     add(
       data_: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -546,6 +562,12 @@ export interface Verify extends BaseContract {
 
   REMOVER_ADMIN(overrides?: CallOverrides): Promise<string>;
 
+  accountStatusAtTime(
+    account_: PromiseOrValue<string>,
+    timestamp_: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   add(
     data_: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -647,6 +669,12 @@ export interface Verify extends BaseContract {
     REMOVER(overrides?: CallOverrides): Promise<string>;
 
     REMOVER_ADMIN(overrides?: CallOverrides): Promise<string>;
+
+    accountStatusAtTime(
+      account_: PromiseOrValue<string>,
+      timestamp_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     add(
       data_: PromiseOrValue<BytesLike>,
@@ -822,6 +850,12 @@ export interface Verify extends BaseContract {
 
     REMOVER_ADMIN(overrides?: CallOverrides): Promise<BigNumber>;
 
+    accountStatusAtTime(
+      account_: PromiseOrValue<string>,
+      timestamp_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     add(
       data_: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -926,6 +960,12 @@ export interface Verify extends BaseContract {
     REMOVER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     REMOVER_ADMIN(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    accountStatusAtTime(
+      account_: PromiseOrValue<string>,
+      timestamp_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     add(
       data_: PromiseOrValue<BytesLike>,

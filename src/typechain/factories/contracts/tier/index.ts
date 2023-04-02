@@ -5,5 +5,3 @@ export { CombineTier__factory } from "./CombineTier__factory";
 export { CombineTierFactory__factory } from "./CombineTierFactory__factory";
 export { ITierV2__factory } from "./ITierV2__factory";
 export { TierV2__factory } from "./TierV2__factory";
-export { VerifyTier__factory } from "./VerifyTier__factory";
-export { VerifyTierFactory__factory } from "./VerifyTierFactory__factory";

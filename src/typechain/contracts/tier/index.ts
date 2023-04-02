@@ -5,5 +5,3 @@ export type { CombineTier } from "./CombineTier";
 export type { CombineTierFactory } from "./CombineTierFactory";
 export type { ITierV2 } from "./ITierV2";
 export type { TierV2 } from "./TierV2";
-export type { VerifyTier } from "./VerifyTier";
-export type { VerifyTierFactory } from "./VerifyTierFactory";

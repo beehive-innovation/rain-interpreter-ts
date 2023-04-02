@@ -1,24 +1,29 @@
-import { BigNumber, getDefaultProvider, VoidSigner } from "ethers";
+import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../../interpreter/types";
 import { ISaleV2__factory } from "../../../../typechain";
 import { paddedUInt160 } from "../../../../utils";
 
 /**
  * @public
  */
-export async function OpISaleV2SaleStatus(
+export const OpISaleV2SaleStatus: opClosure = async(
     _inputs: BigNumber[],
     _operand: number,
-    _data?: any
-): Promise<BigNumber[]> {
+    _data: InterpreterData
+): Promise<BigNumber[]> => {
     const address = paddedUInt160(_inputs[0])
-    const iSaleV2Contract = ISaleV2__factory.connect(
-        address,
-        new VoidSigner(
-            "0x7a73A10cdF5A0016C014fe23dEC0cbfa85eD7e1d",
-            getDefaultProvider(_data.chainId)
+    const blockTag = _data.blockNumber
+    const voidSigner = _data.voidSigner
+    try {
+        const iSaleV2Contract = ISaleV2__factory.connect(
+            address,
+            voidSigner
         )
-    )
-    return [
-        BigNumber.from(await iSaleV2Contract.saleStatus())
-    ]
+        return [
+            BigNumber.from(await iSaleV2Contract.saleStatus({ blockTag }))
+        ]
+    }
+    catch(err) {
+        throw new Error(`something went wrong, reason: ${err}`)
+    }
 }

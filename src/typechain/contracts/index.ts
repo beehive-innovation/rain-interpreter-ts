@@ -5,6 +5,8 @@ import type * as cooldown from "./cooldown";
 export type { cooldown };
 import type * as dance from "./dance";
 export type { dance };
+import type * as debug from "./debug";
+export type { debug };
 import type * as erc20 from "./erc20";
 export type { erc20 };
 import type * as escrow from "./escrow";

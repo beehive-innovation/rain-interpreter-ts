@@ -2,7 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as auto from "./auto";
-export { IVerifyCallback__factory } from "./IVerifyCallback__factory";
+export { IVerifyCallbackV1__factory } from "./IVerifyCallbackV1__factory";
+export { IVerifyV1__factory } from "./IVerifyV1__factory";
 export { Verify__factory } from "./Verify__factory";
 export { VerifyCallback__factory } from "./VerifyCallback__factory";
 export { VerifyFactory__factory } from "./VerifyFactory__factory";

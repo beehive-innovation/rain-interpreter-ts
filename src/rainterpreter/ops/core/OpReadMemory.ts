@@ -1,17 +1,16 @@
 import { BigNumber } from "ethers";
-import { RainInterpreterTs } from "../../../interpreter/RainInterpreterTs";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 
 /**
  * @public
  */
-export function OpReadMemory(
-    this: RainInterpreterTs,
+export const OpReadMemory: opClosure = (
     _inputs: BigNumber[],
     _operand: number,
-    _data?: any
-): BigNumber[] {
+    _data: InterpreterData
+): BigNumber[] => {
     if (_operand & 1) return [
-        this.state.constants[_operand >> 1]
+        BigNumber.from(_data.stateConfig.constants[_operand >> 1])
     ]
-    else return [_inputs[_operand >> 1]]
+    else return [_data.stack[_operand >> 1]]
 }

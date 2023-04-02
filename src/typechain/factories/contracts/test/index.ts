@@ -10,6 +10,7 @@ export * as escrow from "./escrow";
 export * as factory from "./factory";
 export * as idempotent from "./idempotent";
 export * as interpreter from "./interpreter";
+export * as kv from "./kv";
 export * as math from "./math";
 export * as memory from "./memory";
 export * as phased from "./phased";

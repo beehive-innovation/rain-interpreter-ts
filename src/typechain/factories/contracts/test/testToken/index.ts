@@ -3,6 +3,7 @@
 /* eslint-disable */
 export { ReserveToken__factory } from "./ReserveToken__factory";
 export { ReserveToken18__factory } from "./ReserveToken18__factory";
+export { ReserveTokenDecimals__factory } from "./ReserveTokenDecimals__factory";
 export { ReserveTokenERC1155__factory } from "./ReserveTokenERC1155__factory";
 export { ReserveTokenERC20Snapshot__factory } from "./ReserveTokenERC20Snapshot__factory";
 export { ReserveTokenERC721__factory } from "./ReserveTokenERC721__factory";

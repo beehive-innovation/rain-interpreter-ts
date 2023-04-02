@@ -3,7 +3,8 @@
 /* eslint-disable */
 import type * as auto from "./auto";
 export type { auto };
-export type { IVerifyCallback } from "./IVerifyCallback";
+export type { IVerifyCallbackV1 } from "./IVerifyCallbackV1";
+export type { IVerifyV1 } from "./IVerifyV1";
 export type { Verify } from "./Verify";
 export type { VerifyCallback } from "./VerifyCallback";
 export type { VerifyFactory } from "./VerifyFactory";

@@ -1,9 +1,14 @@
 import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 
 /**
  * @public
  */
-export function OpDiv(_inputs: BigNumber[], _operand: number, _data?: any): BigNumber[] {
+export const OpDiv: opClosure = (
+    _inputs: BigNumber[],
+    _operand: number,
+    _data: InterpreterData
+): BigNumber[] => {
     const items_ = _inputs.splice(-_operand)
     let _accumulator = items_.shift()
     let _item

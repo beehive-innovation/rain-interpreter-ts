@@ -25,11 +25,13 @@ import type {
 
 export type IOStruct = {
   token: PromiseOrValue<string>;
+  decimals: PromiseOrValue<BigNumberish>;
   vaultId: PromiseOrValue<BigNumberish>;
 };
 
-export type IOStructOutput = [string, BigNumber] & {
+export type IOStructOutput = [string, number, BigNumber] & {
   token: string;
+  decimals: number;
   vaultId: BigNumber;
 };
 
@@ -40,6 +42,7 @@ export type OrderStruct = {
   handleIODispatch: PromiseOrValue<BigNumberish>;
   validInputs: IOStruct[];
   validOutputs: IOStruct[];
+  data: PromiseOrValue<BytesLike>;
 };
 
 export type OrderStructOutput = [
@@ -48,7 +51,8 @@ export type OrderStructOutput = [
   BigNumber,
   BigNumber,
   IOStructOutput[],
-  IOStructOutput[]
+  IOStructOutput[],
+  string
 ] & {
   owner: string;
   interpreter: string;
@@ -56,6 +60,7 @@ export type OrderStructOutput = [
   handleIODispatch: BigNumber;
   validInputs: IOStructOutput[];
   validOutputs: IOStructOutput[];
+  data: string;
 };
 
 export type TakeOrderConfigStruct = {
@@ -101,13 +106,18 @@ export type TakeOrdersConfigStructOutput = [
 
 export interface ZeroExOrderBookFlashBorrowerInterface extends utils.Interface {
   functions: {
-    "arb((address,address,uint256,uint256,uint256,((address,address,uint256,uint256,(address,uint256)[],(address,uint256)[]),uint256,uint256)[]),address,bytes)": FunctionFragment;
+    "arb((address,address,uint256,uint256,uint256,((address,address,uint256,uint256,(address,uint8,uint256)[],(address,uint8,uint256)[],bytes),uint256,uint256)[]),address,bytes)": FunctionFragment;
     "onFlashLoan(address,address,uint256,uint256,bytes)": FunctionFragment;
+    "orderBook()": FunctionFragment;
     "zeroExExchangeProxy()": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "arb" | "onFlashLoan" | "zeroExExchangeProxy"
+    nameOrSignatureOrTopic:
+      | "arb"
+      | "onFlashLoan"
+      | "orderBook"
+      | "zeroExExchangeProxy"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -128,6 +138,7 @@ export interface ZeroExOrderBookFlashBorrowerInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "orderBook", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "zeroExExchangeProxy",
     values?: undefined
@@ -138,6 +149,7 @@ export interface ZeroExOrderBookFlashBorrowerInterface extends utils.Interface {
     functionFragment: "onFlashLoan",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "orderBook", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "zeroExExchangeProxy",
     data: BytesLike
@@ -189,6 +201,8 @@ export interface ZeroExOrderBookFlashBorrower extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    orderBook(overrides?: CallOverrides): Promise<[string]>;
+
     zeroExExchangeProxy(overrides?: CallOverrides): Promise<[string]>;
   };
 
@@ -208,6 +222,8 @@ export interface ZeroExOrderBookFlashBorrower extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  orderBook(overrides?: CallOverrides): Promise<string>;
+
   zeroExExchangeProxy(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
@@ -226,6 +242,8 @@ export interface ZeroExOrderBookFlashBorrower extends BaseContract {
       data_: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    orderBook(overrides?: CallOverrides): Promise<string>;
 
     zeroExExchangeProxy(overrides?: CallOverrides): Promise<string>;
   };
@@ -249,6 +267,8 @@ export interface ZeroExOrderBookFlashBorrower extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    orderBook(overrides?: CallOverrides): Promise<BigNumber>;
+
     zeroExExchangeProxy(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
@@ -268,6 +288,8 @@ export interface ZeroExOrderBookFlashBorrower extends BaseContract {
       data_: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    orderBook(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     zeroExExchangeProxy(
       overrides?: CallOverrides

@@ -1,10 +1,15 @@
 import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 import { selectLte } from "../../../lib/TierwiseCombine";
 
 /**
  * @public
  */
-export function OpSelectLte(_inputs: BigNumber[], _operand: number, _data?: any): BigNumber[] {
+export const OpSelectLte: opClosure = (
+    _inputs: BigNumber[],
+    _operand: number,
+    _data: InterpreterData
+): BigNumber[] => {
     const length_ = _operand & 31
     const mode_ = (_operand >> 5) & 3
     const logic_ = _operand >> 7

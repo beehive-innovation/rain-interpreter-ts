@@ -3,6 +3,7 @@
 /* eslint-disable */
 export * as cooldown from "./cooldown";
 export * as dance from "./dance";
+export * as debug from "./debug";
 export * as erc20 from "./erc20";
 export * as escrow from "./escrow";
 export * as factory from "./factory";

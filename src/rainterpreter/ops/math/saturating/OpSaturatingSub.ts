@@ -1,10 +1,15 @@
 import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../../interpreter/types";
 import { saturatingSub } from "../../../../lib/SaturatingMath";
 
 /**
  * @public
  */
-export function OpSaturatingSub(_inputs: BigNumber[], _operand: number, _data?: any): BigNumber[] {
+export const OpSaturatingSub: opClosure = (
+    _inputs: BigNumber[],
+    _operand: number,
+    _data: InterpreterData
+): BigNumber[] => {
     const items_ = _inputs.splice(-_operand)
     let _accumulator = items_.shift()
     let _item

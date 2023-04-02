@@ -1,9 +1,14 @@
 import { BigNumber, ethers } from "ethers";
+import { InterpreterData, opClosure } from "../../../../interpreter/types";
 
 /**
  * @public
  */
-export function OpIsZero(_inputs: BigNumber[], _operand: number, _data?: any): BigNumber[] {
+export const OpIsZero: opClosure = (
+    _inputs: BigNumber[],
+    _operand: number,
+    _data: InterpreterData
+): BigNumber[] => {
     const item_ = _inputs.pop()
     if (item_ !== undefined) return [
         item_.isZero() 

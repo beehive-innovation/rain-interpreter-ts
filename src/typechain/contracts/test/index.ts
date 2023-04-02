@@ -19,6 +19,8 @@ import type * as idempotent from "./idempotent";
 export type { idempotent };
 import type * as interpreter from "./interpreter";
 export type { interpreter };
+import type * as kv from "./kv";
+export type { kv };
 import type * as math from "./math";
 export type { math };
 import type * as memory from "./memory";

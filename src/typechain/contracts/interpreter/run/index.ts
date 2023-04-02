@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { IInterpreterV1 } from "./IInterpreterV1";
-export type { StandardInterpreter } from "./StandardInterpreter";

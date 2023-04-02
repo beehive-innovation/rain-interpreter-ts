@@ -7,7 +7,7 @@ Deeply freezes an object, all of the properties of propterties gets frozen
 <b>Signature:</b>
 
 ```typescript
-function deepFreeze(object: any): any;
+function deepFreeze(object: any): void;
 ```
 
 ## Parameters
@@ -18,7 +18,5 @@ function deepFreeze(object: any): any;
 
 <b>Returns:</b>
 
-`any`
-
-frozen object
+`void`
 

@@ -1,13 +1,14 @@
 import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 
 /**
  * @public
  */
-export function OpExplode32(
+export const OpExplode32: opClosure = (
     _inputs: BigNumber[],
     _operand: number,
-    _data?: any
-): BigNumber[] {
+    _data: InterpreterData
+): BigNumber[] => {
     const maxUint32 = '0xffffffff'
     return [
         _inputs[0].and(maxUint32),

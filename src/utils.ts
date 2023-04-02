@@ -2,7 +2,8 @@
 import type { BytesLike } from 'ethers';
 import { isBytes, isHexString } from 'ethers/lib/utils';
 import { BigNumber, BigNumberish, ethers, utils } from 'ethers';
-import { StateConfig } from './types';
+import { StateConfig } from './interpreter/types';
+
 
 export const {
     /**
@@ -300,8 +301,26 @@ export function selectLteOperand(
     mode: number,
     inputSize: number
 ): number {
-    const operand = (logic << 13) + (mode << 8) + inputSize;
-    return operand;
+    return (logic << 13) + (mode << 8) + inputSize
+}
+
+/**
+ * @public
+ * Builds the operand for RainInterpreter's `FOLD_CONTEXT` opcode by packing 4 numbers into 2 bytes.
+ *
+ * @param sourceIndex - index of function source
+ * @param foldColumn - column to start from
+ * @param width - width of the column
+ * @param inputs - accumulator input count
+ * @returns a 2 bytes size number
+ */
+export function foldContextOperand(
+    sourceIndex: number,
+    foldColumn: number,
+    width: number,
+    inputs: number
+): number {
+    return (inputs << 12) + (width << 8) + (foldColumn << 4) + sourceIndex
 }
 
 /**
@@ -550,7 +569,6 @@ export const areEqualStateConfigs = (
  * Deeply freezes an object, all of the properties of propterties gets frozen
  * 
  * @param object - object to freez
- * @returns frozen object
  */
 export function deepFreeze(object: any) {
     if (typeof object === 'object') {
@@ -561,10 +579,13 @@ export function deepFreeze(object: any) {
         for (const name of propNames) {
             const value = object[name]
             if (value && typeof value === "object") {
-                deepFreeze(value)
+                try {
+                    deepFreeze(value)
+                }
+                catch {}
             }
         }
-        return Object.freeze(object)
+        Object.freeze(object)
     }
 }
 

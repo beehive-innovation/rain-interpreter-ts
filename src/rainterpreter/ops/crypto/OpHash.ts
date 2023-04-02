@@ -1,10 +1,15 @@
 import { BigNumber } from "ethers";
 import { solidityKeccak256 } from "ethers/lib/utils";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 
 /**
  * @public
  */
-export function OpHash(_inputs: BigNumber[], _operand: number, _data?: any): BigNumber[] {
+export const OpHash: opClosure = (
+    _inputs: BigNumber[],
+    _operand: number,
+    _data: InterpreterData
+): BigNumber[] => {
     const _items: string[] = []
     for (let i = 0; i < _inputs.length; i++) {
         _items.push(_inputs[i].toHexString())

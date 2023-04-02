@@ -1,28 +1,33 @@
-import { BigNumber, getDefaultProvider, VoidSigner } from "ethers";
+import { BigNumber } from "ethers";
+import { InterpreterData, opClosure } from "../../../../interpreter/types";
 import { ERC20SnapshotUpgradeable__factory } from "../../../../typechain";
 import { paddedUInt160 } from "../../../../utils";
 
 /**
  * @public
  */
-export async function OpERC20SnapshotTotalSupplyAt(
+export const OpERC20SnapshotTotalSupplyAt: opClosure = async(
     _inputs: BigNumber[],
     _operand: number,
-    _data?: any
-): Promise<BigNumber[]> {
+    _data: InterpreterData
+): Promise<BigNumber[]> => {
     const item2_ = _inputs.pop()
     const item1_ = _inputs.pop()
-    if (item1_ && item2_ && typeof _data.chainId === 'number') {
+    const blockTag = _data.blockNumber
+    const voidSigner = _data.voidSigner
+    if (item1_ && item2_) {
         const snapshotId_ = item2_
         const erc20Address_ = paddedUInt160(item1_)
-        const erc20Snapshot_ = ERC20SnapshotUpgradeable__factory.connect(
-            erc20Address_,
-            new VoidSigner(
-                "0x7a73A10cdF5A0016C014fe23dEC0cbfa85eD7e1d",
-                getDefaultProvider(_data.chainId)
+        try {
+            const erc20Snapshot_ = ERC20SnapshotUpgradeable__factory.connect(
+                erc20Address_,
+                voidSigner
             )
-        )
-        return [await erc20Snapshot_.totalSupplyAt(snapshotId_)]
+            return [await erc20Snapshot_.totalSupplyAt(snapshotId_, { blockTag })]
+        }
+        catch(err) {
+            throw new Error(`something went wrong, reason: ${err}`)
+        }
     }
     else throw new Error('Undefined stack variables')
 }

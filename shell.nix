@@ -27,7 +27,7 @@ let
 
     build = pkgs.writeShellScriptBin "build" ''
         copy-contracts
-        typechain
+        generate-typechain
         tsc
     '';
 
@@ -53,15 +53,19 @@ let
         hardhat compile --no-typechain
     '';
 
-    typechain = pkgs.writeShellScriptBin "typechain" ''
+    generate-typechain = pkgs.writeShellScriptBin "generate-typechain" ''
         hardhat typechain
         rm -rf src/typechain
-        mkdir -p src/typechain 
+        mkdir -p src/typechain
         cp -r typechain src
     '';
 
     compile = pkgs.writeShellScriptBin "compile" ''
         tsc ''${1}
+    '';
+
+    dist = pkgs.writeShellScriptBin "dist" ''
+        tsc
     '';
 
     in
@@ -79,8 +83,9 @@ let
             docgen
             lint
             copy-contracts
-            typechain
+            generate-typechain
             compile
+            dist
         ];
 
         shellHook = ''

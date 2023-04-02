@@ -1,18 +1,18 @@
 {
-    "name": "@beehiveinnovation/rain-interpreter-ts",
+    "name": "@rainprotocol/interpreter-ts",
     "version": "0.0.0",
     "description": "Rain Interpreter written in TypeScript",
-    "author": "Beehive Innovation",
+    "author": "Rain Protocol",
     "license": "CAL-1.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/beehive-innovation/rain-interpreter-ts.git"
+        "url": "https://github.com/rainprotocol/interpreter-ts.git"
     },
     "keywords": [],
     "bugs": {
-        "url": "https://github.com/beehive-innovation/rain-interpreter-ts/issues"
+        "url": "https://github.com/rainprotocol/interpreter-ts/issues"
     },
-    "homepage": "http://beehive-innovation.github.io/rain-interpreter-ts/",
+    "homepage": "http://rainprotocol.github.io/interpreter-ts/",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
     "module": "dist/index.js",
@@ -25,13 +25,14 @@
         "node": ">=10"
     },
     "scripts": {
-        "build": "yarn run copy-contracts && yarn run typechain && tsc",
+        "build": "yarn run copy-contracts && yarn run generate-typechain && tsc",
         "prepare": "tsc",
+        "dist": "tsc",
         "test": "echo 'there is no test at the moment'",
         "lint": "eslint --fix \"src/**\" \"test/**\"",
         "docgen": "rm -rf ./docs && api-extractor run --local && api-documenter -i ./ -o ./docs",
-        "copy-contracts": "mkdir -p contracts && cp -r node_modules/@beehiveinnovation/rain-protocol/contracts . && hardhat compile --no-typechain",
-        "typechain": "hardhat typechain && rm -rf src/typechain && mkdir -p src/typechain && cp -r typechain src"
+        "copy-contracts": "mkdir -p contracts && cp -r node_modules/rainprotocol/rain-protocol/contracts . && hardhat compile --no-typechain",
+        "generate-typechain": "hardhat typechain && rm -rf src/typechain && mkdir -p src/typechain && cp -r typechain src"
     },
     "prettier": {
         "printWidth": 100,
@@ -42,7 +43,7 @@
         "trailingComma": "es5"
     },
     "devDependencies": {
-        "@beehiveinnovation/rain-protocol": "git+https://github.com/beehive-innovation/rain-protocol.git#f34fff1b1605a1c2dc73aa24c04235c6a49cc35a",
+        "@beehiveinnovation/rain-protocol": "git+https://github.com/beehive-innovation/rain-protocol.git#ea99544d47c4f5b02c3e450b7a2965907f242581",
         "@microsoft/api-extractor": "^7.33.5",
         "@nomiclabs/hardhat-ethers": "2.1.1",
         "@nomiclabs/hardhat-waffle": "2.0.1",
@@ -55,6 +56,7 @@
         "@typescript-eslint/eslint-plugin": "^5.42.0",
         "@typescript-eslint/parser": "^5.42.0",
         "chai": "^4.3.6",
+        "dotenv": "^16.0.3",
         "eslint": "^8.26.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",

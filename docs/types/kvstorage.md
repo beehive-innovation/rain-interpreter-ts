@@ -2,12 +2,17 @@
 
 # Type kvStorage
 
-Type for TypeScript Interpreter Storage which holds key/value pairs key is string type as uin256 hex string i.e. 32 bytes hex string
+Type os interpreter-ts storage obj which holds key/value pairs mapped by sender and namespace addresses
 
 <b>Signature:</b>
 
 ```typescript
 type kvStorage = {
-    [key: string]: BigNumber;
+    [sender: string]: {
+        [namespace: string]: {
+            key: BigNumber;
+            value: BigNumber;
+        }[];
+    };
 };
 ```

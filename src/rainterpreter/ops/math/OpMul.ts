@@ -1,9 +1,14 @@
 import { BigNumber, ethers } from "ethers";
+import { InterpreterData, opClosure } from "../../../interpreter/types";
 
 /**
  * @public
  */
-export function OpMul(_inputs: BigNumber[], _operand: number, _data?: any): BigNumber[] {
+export const OpMul: opClosure = (
+    _inputs: BigNumber[],
+    _operand: number,
+    _data: InterpreterData
+): BigNumber[] => {
     let _accumulator = ethers.constants.One
     let _item
     for (let i = 0; i < _operand; i++) {

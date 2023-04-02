@@ -49,6 +49,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -66,6 +71,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -74,6 +84,11 @@ const _abi = [
             internalType: "struct IO[]",
             name: "validOutputs",
             type: "tuple[]",
+          },
+          {
+            internalType: "bytes",
+            name: "data",
+            type: "bytes",
           },
         ],
         internalType: "struct OrderConfig",
@@ -118,6 +133,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -135,6 +155,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -143,6 +168,11 @@ const _abi = [
             internalType: "struct IO[]",
             name: "validOutputs",
             type: "tuple[]",
+          },
+          {
+            internalType: "bytes",
+            name: "data",
+            type: "bytes",
           },
         ],
         internalType: "struct Order",
@@ -179,6 +209,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -196,6 +231,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -204,6 +244,11 @@ const _abi = [
             internalType: "struct IO[]",
             name: "validOutputs",
             type: "tuple[]",
+          },
+          {
+            internalType: "bytes",
+            name: "data",
+            type: "bytes",
           },
         ],
         internalType: "struct Order",
@@ -315,6 +360,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -332,6 +382,11 @@ const _abi = [
                 type: "address",
               },
               {
+                internalType: "uint8",
+                name: "decimals",
+                type: "uint8",
+              },
+              {
                 internalType: "uint256",
                 name: "vaultId",
                 type: "uint256",
@@ -340,6 +395,11 @@ const _abi = [
             internalType: "struct IO[]",
             name: "validOutputs",
             type: "tuple[]",
+          },
+          {
+            internalType: "bytes",
+            name: "data",
+            type: "bytes",
           },
         ],
         internalType: "struct Order",
@@ -413,6 +473,11 @@ const _abi = [
                         type: "address",
                       },
                       {
+                        internalType: "uint8",
+                        name: "decimals",
+                        type: "uint8",
+                      },
+                      {
                         internalType: "uint256",
                         name: "vaultId",
                         type: "uint256",
@@ -430,6 +495,11 @@ const _abi = [
                         type: "address",
                       },
                       {
+                        internalType: "uint8",
+                        name: "decimals",
+                        type: "uint8",
+                      },
+                      {
                         internalType: "uint256",
                         name: "vaultId",
                         type: "uint256",
@@ -438,6 +508,11 @@ const _abi = [
                     internalType: "struct IO[]",
                     name: "validOutputs",
                     type: "tuple[]",
+                  },
+                  {
+                    internalType: "bytes",
+                    name: "data",
+                    type: "bytes",
                   },
                 ],
                 internalType: "struct Order",

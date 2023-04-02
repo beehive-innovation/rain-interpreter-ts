@@ -2,7 +2,7 @@
 
 # Interface State
 
-- An interface, StateJS is basically javascript version of 'State' struct in RainVM, although it doesn't need stackLength and argumentsLength to operate. It receives a regular RainVM in the constructor and initiates the stack for it and all opcodes do their operations to the stack.
+The eval state of current expression of interpreter-ts
 
 <b>Signature:</b>
 
@@ -14,15 +14,17 @@ interface State
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [constants](./state.md#constants-property) | `BigNumber[]` |  |
-|  [sources](./state.md#sources-property) | `Uint8Array[]` |  |
-|  [stack](./state.md#stack-property) | `BigNumber[]` | The RainInterpreterTs's stack. |
+|  [constants](./state.md#constants-property) | `BigNumber[]` | The expression's constants that is being evaluated |
+|  [sources](./state.md#sources-property) | `Uint8Array[]` | The expression's sources that is being evaluated |
+|  [stack](./state.md#stack-property) | `BigNumber[]` | The interpreter-ts's stack. |
 
 ## Property Details
 
 <a id="constants-property"></a>
 
 ### constants
+
+The expression's constants that is being evaluated
 
 <b>Signature:</b>
 
@@ -34,6 +36,8 @@ readonly constants: BigNumber[];
 
 ### sources
 
+The expression's sources that is being evaluated
+
 <b>Signature:</b>
 
 ```typescript
@@ -44,7 +48,7 @@ readonly sources: Uint8Array[];
 
 ### stack
 
-The RainInterpreterTs's stack.
+The interpreter-ts's stack.
 
 <b>Signature:</b>
 
